@@ -11,8 +11,7 @@ namespace Interface
         public List<Animal> animals = new();
         public List<ZooWorker> zooWorkers = new();
         public List<VideoCamera> videoCameras = new();
-        
-
+       
         public Zoo()
         {
         }

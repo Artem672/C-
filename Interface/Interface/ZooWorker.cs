@@ -12,9 +12,15 @@ namespace Interface
         public void Watching(Zoo zoo)
         {
             Random rnd = new();
-            Console.WriteLine($"{this.GetType().Name}: {WorkerName} is watching on: {zoo.animals[rnd.Next(0, zoo.animals.Count)]}");
+            int AnimalId = rnd.Next(0, zoo.animals.Count);
+            Console.WriteLine($"{this.GetType().Name}: {WorkerName} is watching on: {zoo.animals[AnimalId].GetType().Name}:{zoo.animals[AnimalId].AnimalName}");
         }
-
+        public void Feeding(Zoo zoo)
+        {
+            Random rnd = new();
+            int AnimalId = rnd.Next(0, zoo.animals.Count);
+            Console.WriteLine($"{this.GetType().Name}: {WorkerName} is feeding: {zoo.animals[AnimalId].GetType().Name}:{zoo.animals[AnimalId].AnimalName}");
+        }
         public ZooWorker(string WorkerName)
         {
             this.WorkerName = WorkerName;

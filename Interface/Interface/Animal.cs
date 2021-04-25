@@ -42,7 +42,7 @@ namespace Interface
 
         public override string ToString()
         {
-            return $"{this.GetType().Name}: {this.AnimalName}\nWalk speed: {this.}"
+            return $"{this.GetType().Name}: {this.AnimalName}\nWalk speed: {this.WalkSpeed}\nFood type: {this.FoodType}\nSleep time: {this.SleepTime}";
         }
     }
 }
