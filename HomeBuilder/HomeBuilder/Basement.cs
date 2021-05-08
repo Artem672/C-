@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace HomeBuilder
 {
+    enum BasementType
+    {
+        Tape = 0,
+
+    }
     class Basement
     {
     }

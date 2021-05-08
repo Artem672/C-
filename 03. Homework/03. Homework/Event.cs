@@ -8,43 +8,44 @@ namespace _03.Homework
 {
     class Event
     {
-        public string EventName { get; set; }
-        public string Place { get; set; }
-        public uint MaxPersons { get; set; }
+        string name;
+        short peopleCount;
+        string placeHolder;
+        DateTime date = new DateTime();
+        static byte counter = 0;
 
-        DateTime EventDate;
-
-        static uint EventId = 0;
-
-        public Event(string EventName, string Place, uint MaxPersons, DateTime Date)
+        public string Name { get; set; }
+        public byte Counter { get; set; }
+        public DateTime Date
         {
-            this.EventName = EventName;
-            this.Place = Place;
-            this.MaxPersons = MaxPersons;
-            this.EventDate = Date;
-            EventId++;
+            get { return this.date; }
+            set { this.date = value; }
+        }
+
+        Client client;
+
+        public Client Client
+        {
+            get { return client; }
+            set { client = value; }
+        }
+
+        public Event(string name, short peopleCount, string placeHolder, Client client, DateTime date)
+        {
+            this.name = name;
+            this.peopleCount = peopleCount;
+            this.placeHolder = placeHolder;
+            this.date = date;
+
+            this.client = client;
+
+            counter++;
         }
 
         public override string ToString()
         {
-            return $"Назва: {this.EventName}\nМісце: {this.Place}\nМаксимальна кількість людей: {this.MaxPersons}\nДата проведення: {this.EventDate}";
+            return $"Event: Name: {name} People count: {peopleCount} Date time {date.ToShortDateString()} | Client: " + client.ToString();
         }
 
-        void AddDays(double DayNumber)
-        {
-            if (DayNumber > 0)
-            {
-                this.EventDate.AddDays(DayNumber);
-            }          
-        }
-
-        void AddWeeks(double WeekNumber)
-        {
-            if(WeekNumber > 0)
-            {
-                double Days = WeekNumber * 7;
-                this.EventDate.AddDays(Days);
-            }        
-        }
     }
 }

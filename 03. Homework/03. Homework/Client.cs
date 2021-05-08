@@ -8,18 +8,54 @@ namespace _03.Homework
 {
     class Client
     {
-        public string Name { get; set; }
-        public string PhoneNumber { get; set; }
+        string number;
+        string name;
 
-        public Client(string Name, string PhoneNumber)
+        public string Name
         {
-            this.Name = Name;
-            this.PhoneNumber = PhoneNumber;
+            get { return this.name; }
+            set { this.name = value; }
         }
 
-        public override string ToString()
+        public Client(string name, string number)
         {
-            return $"Ім'я: {this.Name}\nНомер телефону: {this.PhoneNumber}";
+            this.name = name;
+
+            if (!NumberCorrectnessCond(number))
+                while (!NumberCorrectnessCond(number))
+                {
+                    Console.WriteLine("Your number is incorrect! Enter again!");
+                    Console.Write("Enter your number (should start with 380 and its lenght equals 12 digits): ");
+                    number = Console.ReadLine();
+                }
+
+            this.number = number;
         }
+
+        public override string ToString() => $"Name: {name}; Number: {number}";
+
+        bool NumberCorrectnessCond(string number)
+        {
+            foreach (char sym in number)
+            {
+                if (sym < '0' || sym > '9')
+                    return false;
+                else
+                {
+                    if (number[0] != '3')
+                        return false;
+                    else if (number[1] != '8')
+                        return false;
+                    else if (number[2] != '0')
+                        return false;
+                    else if (number.Length > 12 || number.Length < 12)
+                        return false;
+                    else
+                        return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

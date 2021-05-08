@@ -10,89 +10,97 @@ namespace _03.Homework
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            bool Menu = true;
-            char MenuChoice;
-            List<Client> clients = new List<Client>();
-            EventService @event = new EventService();
+            EventService events = new EventService();
 
-            while (Menu)
+            char key;
+            do
             {
-                Console.Clear();
-                Console.WriteLine("0. Вихід");
-                Console.WriteLine("1. Додати клієнта");
-                Console.WriteLine("2. Переглянути список клієнтів");
-                Console.WriteLine("3. Додати захід");
-                Console.WriteLine("4. Переглянути список заходів");
-                Console.Write("Ваш вибір -> ");
-                MenuChoice = Convert.ToChar(Console.ReadLine());
+                Console.Write("Event menu:\n1: Add event\n2: Remove event\n3: Remove all events\n4: Show all events\n5: Search event on special date\n6: Show event between to dates\n7: Show event by client\n8: Exit\n->");
+                key = char.Parse(Console.ReadLine());
 
-                switch (MenuChoice)
+                switch (key)
                 {
-                    case '0':
-                        Menu = false;
-                        break;
                     case '1':
                         Console.Clear();
-                        bool CorrectPhoneNumber = false;
-                        Console.Write("Введіть ім'я: ");
-                        string Name = Console.ReadLine();
-                        string PhoneNumber = default;
-                        do
-                        {
-                            bool OnlyDigit = true;
-                            Console.Write("Введіть номер телефону (починаючи з 380): ");
-                            PhoneNumber = Console.ReadLine();
-
-                            char[] phoneN = PhoneNumber.ToCharArray();
-                            for (int i = 0; i < phoneN.Length; i++)
-                            {
-                                if (!Char.IsDigit(phoneN[i]))
-                                {
-                                    OnlyDigit = false;
-                                }
-                            }
-
-                            if (PhoneNumber.Length == 12 && (PhoneNumber[0] == '3' && PhoneNumber[1] == '8' && PhoneNumber[2] == '0') && OnlyDigit == true)
-                            {
-                                CorrectPhoneNumber = true;
-                            }
-                        } while (CorrectPhoneNumber != true);
-                        Client Person = new Client(Name, PhoneNumber);
-                        clients.Add(Person);
+                        events.AddEvent();
+                        Console.Clear();
+                        events.Print();
                         break;
                     case '2':
                         Console.Clear();
-                        if (clients.Count != 0)
-                        {
-                            foreach (Client item in clients)
-                            {
-                                Console.WriteLine(item.ToString());
-                            }
-                        }
+                        events.RemoveEvent();
                         break;
                     case '3':
                         Console.Clear();
-                        @event.AddEvent();
+                        events.RemoveAllEvents();
                         break;
                     case '4':
                         Console.Clear();
-                        if(@event.Events.Count != 0)
-                        {
-                            foreach (Event item in @event.Events)
-                            {
-                                Console.WriteLine(item.ToString());
-                                Console.WriteLine();
-                            }
-                        }
+                        events.Print();
                         break;
+                    case '5':
+                        {
+                            Console.Clear();
+                            DateTime date;
+                            int month, day;
+
+                            Console.Write("Enter month: ");
+                            month = int.Parse(Console.ReadLine());
+                            Console.Write("Enter day: ");
+                            day = int.Parse(Console.ReadLine());
+
+                            date = new DateTime(2021, month, day);
+
+                            events.Print(date);
+
+                            break;
+                        }
+                    case '6':
+                        {
+                            Console.Clear();
+                            DateTime date1, date2;
+                            int month, day;
+
+                            Console.Write("Enter date 1 month: ");
+                            month = int.Parse(Console.ReadLine());
+                            Console.Write("Enter date 1 day: ");
+                            day = int.Parse(Console.ReadLine());
+
+                            date1 = new DateTime(2021, month, day);
+
+                            Console.Write("Enter date 2 month: ");
+                            month = int.Parse(Console.ReadLine());
+                            Console.Write("Enter date 2 day: ");
+                            day = int.Parse(Console.ReadLine());
+
+                            date2 = new DateTime(2021, month, day);
+
+                            events.Print(date1, date2);
+
+                            break;
+                        }
+                    case '7':
+                        {
+                            Console.Clear();
+                            string name;
+
+                            Console.Write("Enter client name: ");
+                            name = Console.ReadLine();
+
+                            events.Print(name);
+
+                            break;
+                        }
                     default:
-                        Console.Clear();
-                        Console.WriteLine("Неправильне значення!");
                         break;
                 }
+
                 Console.ReadKey();
-            }
+                Console.Clear();
+
+            } while (key != '8');
+
+
         }
     }
 }

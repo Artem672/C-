@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace HomeBuilder
 {
-    class TeamLeader
+    enum DoorTypes
     {
-        public List<IPart> Parts = new List<IPart>();
-        
+        Glass = 0,
+        Metal,
+        Wood,
+        Profile
+    }
+    class Door
+    {
     }
 }
