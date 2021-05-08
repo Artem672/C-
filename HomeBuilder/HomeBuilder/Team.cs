@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeBuilder
 {
-    class Program
+    class Team
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }

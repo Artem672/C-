@@ -43,8 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basement.cs" />
+    <Compile Include="House.cs" />
+    <Compile Include="IPart.cs" />
+    <Compile Include="IWorker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roof.cs" />
+    <Compile Include="Team.cs" />
+    <Compile Include="TeamLeader.cs" />
+    <Compile Include="Walls.cs" />
+    <Compile Include="Window.cs" />
+    <Compile Include="Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
