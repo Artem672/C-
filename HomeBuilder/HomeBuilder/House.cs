@@ -1,100 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace HomeBuilder
+namespace BildHouse
 {
-    public class House
+    class House
     {
-        public House() { }
+        public List<IPart> partsHouse = new List<IPart>();
+        public bool Finality = true;
 
-        public void DrawBasement()
+        public void BildHouse()
         {
-            for (int i = 0; i < 11; i++)
-            {
-                for (int j = 0; j < 11; j++)
-                {
-                    Console.SetCursorPosition(i, 11);
-                    Console.Write("=");
-                }
-            }
+            BildBasement();
+            System.Threading.Thread.Sleep(400);
+            BildWalls();
+            System.Threading.Thread.Sleep(400);
+            BildDoor();
+            System.Threading.Thread.Sleep(400);
+            BildWindow();
+            System.Threading.Thread.Sleep(400);
+            BildRoof();
+
+            Console.CursorTop = 0;
+            Console.WriteLine("The house was built!");
+
+            Console.CursorTop = 25;
         }
 
-        public void DrawWall()
+        void BildBasement()
         {
-            for (int i = 6; i < 11; i++)
+            for (int y = 20; y > 19; y--)
             {
-                for (int j = 6; j < 11; j++)
-                {
-                    Console.SetCursorPosition(0, j);
-                    Console.Write("|");
-                    Console.SetCursorPosition(10, j);
-                    Console.Write("|");
-                }
+                Console.CursorTop = y;
+                Console.CursorLeft = 4;
+                for (int x = 0; x < 30; x++)
+                    Console.Write((Char)Basement.MaterialStyle.GetHashCode());
             }
         }
-        public void DrawRoof()
+        void BildWalls()
         {
-            bool chSideHap = false;
-            int y = 5;
-            for (int i = 0; i < 11; i++)
+            for (int y = 19; y > 9; y--)
             {
-
-                Console.SetCursorPosition(i, y);
-
-                if (y == 0)
-                {
-                    chSideHap = true;
-                }
-
-                if (!chSideHap)
-                {
-                    Console.Write("/");
-                    y--;
-                }
-                else
-                {
-                    Console.Write("\\");
-
-                    y++;
-                }
-
+                Console.CursorTop = y;
+                Console.CursorLeft = 4;
+                Console.Write((Char)Walls.MaterialStyle.GetHashCode());
+                Console.CursorLeft = 33;
+                Console.Write((Char)Walls.MaterialStyle.GetHashCode());
             }
         }
-
-        public void DrawWindow()
+        void BildDoor()
         {
-            for (int i = 2; i < 5; i++)
+            for (int y = 19; y > 12; y--)
             {
-                for (int j = 7; j < 10; j++)
-                {
-
-                    Console.SetCursorPosition(i, j);
-
-                    if (i == 3 && j == 8)
-                        Console.Write(" ");
-                    else
-                        Console.Write("*");
-                }
+                Console.CursorTop = y;
+                Console.CursorLeft = 26;
+                for (int x = 0; x < 5; x++)
+                    Console.Write((Char)Door.MaterialStyle.GetHashCode());
             }
         }
-        public void DrawDoor()
+        void BildWindow()
         {
-            for (int i = 7; i < 10; i++)
+            for (int y = 12; y < 16; y++)
             {
-                for (int j = 7; j < 11; j++)
-                {
-
-                    Console.SetCursorPosition(i, j);
-
-                    if (i == 8 && (j >= 8 && j <= 10))
-                        Console.Write(" ");
-                    else
-                        Console.Write("*");
-                }
+                Console.CursorTop = y;
+                Console.CursorLeft = 7;
+                for (int x = 0; x < 6; x++)
+                    Console.Write((Char)Window.MaterialStyle.GetHashCode());
             }
+        }
+        void BildRoof()
+        {
+            int rx1 = 0;
+            int rx2 = 37;
+            for (int y = 9; y > 0; y--)
+            {
+                Console.CursorTop = y;
+                Console.CursorLeft = rx1 += 2;
+                Console.Write((Char)Roof.MaterialStyle.GetHashCode());
+                Console.CursorLeft = rx2 -= 2;
+                Console.Write((Char)Roof.MaterialStyle.GetHashCode());
+            }
+            Console.CursorTop = 9;
+            Console.CursorLeft = 3;
+            for (int i = 0; i < 32; i++)
+                Console.Write((Char)Roof.MaterialStyle.GetHashCode());
         }
     }
 }

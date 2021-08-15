@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace HomeBuilder
+namespace BildHouse
 {
     interface IPart
     {
-        string GetWorkingPart();
-        string GetMaterialType(Enum material);
+        public string Material { get; }
+        public char MaterialChar { get; }
+
+        public void Print()
+        {
+            Console.WriteLine($"Bild {this.GetType().Name} Material: {Material} '{MaterialChar}'");
+        }
     }
 }

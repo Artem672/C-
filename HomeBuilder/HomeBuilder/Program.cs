@@ -1,26 +1,39 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HomeBuilder
+namespace BildHouse
 {
-
     class Program
     {
-
         static void Main(string[] args)
         {
-            House house = new House();
+            House house = TeamLeader.CreateProgect();
 
-            house.DrawBasement();
-            house.DrawDoor();
-            house.DrawWall();
-            house.DrawRoof();
-            house.DrawWindow();
+            List<IWorker> Team = new List<IWorker>
+            {
+                new Worker{House = house },
+                new Worker{House = house },
+                new TeamLeader{House = house},
+                new Worker{House = house },
+            };
 
+            IEnumerator enumerator = Team.GetEnumerator();
+
+            while (house.Finality)
+            {
+                if (!enumerator.MoveNext())
+                {
+                    enumerator.Reset();
+                    enumerator.MoveNext();
+                }
+                (enumerator.Current as IWorker).Working();
+            }
+
+            Console.WriteLine("Press to Show Bilding....");
             Console.ReadKey();
+            Console.Clear();
+            house.BildHouse();
         }
     }
 }
